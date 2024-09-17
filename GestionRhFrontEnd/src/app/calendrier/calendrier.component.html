@@ -1,0 +1,50 @@
+<div class="calendrier-container">
+  <!-- Titre de la page -->
+  <div class="page-title">
+    <h1>Calendrier des projets</h1>
+  </div>
+
+  <!-- En-tête du calendrier -->
+  <div class="calendar-header">
+    <h2>{{ mois | titlecase }} {{ annee }}</h2>
+    <div class="calendar-controls">
+      <button (click)="getPreviousMonth()" class="calendar-button">Mois précédent</button>
+      <button (click)="getNextMonth()" class="calendar-button">Mois suivant</button>
+    </div>
+  </div>
+
+  <!-- En-tête des jours du calendrier -->
+  <div class="gantt-header">
+    <div *ngFor="let jour of joursDuMois" class="gantt-day">{{ jour }}</div>
+  </div>
+
+  <!-- Contenu du calendrier avec les barres de projets -->
+  <div class="gantt-content">
+    <div *ngFor="let projet of projetsAffiches" class="gantt-row">
+      <div 
+        class="gantt-bar" 
+        [ngStyle]="{
+          'left': getLeftPosition(projet.dateDebut), 
+          'width': getWidth(projet.dateDebut, projet.dateFin),
+          'background-color': getColorForEtat(projet.etat)
+        }"
+        (click)="selectProjet(projet)">
+        {{ projet.nom }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Superposition pour la boîte d'information -->
+  <div *ngIf="selectedProjet" class="info-overlay" (click)="deselectProjet()"></div>
+
+  <!-- Boîte d'information du projet -->
+  <div *ngIf="selectedProjet" class="info-box">
+    <h3>Détails du Projet</h3>
+    <p><strong>Nom:</strong> {{ selectedProjet.nom }}</p>
+    <p><strong>Responsable:</strong> {{ selectedProjet.responsable }}</p>
+    <p><strong>État:</strong> {{ selectedProjet.etat }}</p>
+    <p><strong>Date de Début:</strong> {{ selectedProjet.dateDebut }}</p>
+    <p><strong>Date de Fin:</strong> {{ selectedProjet.dateFin }}</p>
+    <button (click)="deselectProjet()">Fermer</button>
+  </div>
+</div>

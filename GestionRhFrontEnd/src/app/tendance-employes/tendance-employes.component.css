@@ -1,0 +1,125 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.recent-projet-container {
+  width: 100%;
+  max-width: 1200px; /* Limiter la largeur pour un meilleur rendu sur grands écrans */
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header h2 {
+  color: #333;
+  margin: 0;
+  font-size: 20px; /* Ajuster la taille de la police */
+}
+
+.filter-menu {
+  position: relative;
+}
+
+.filter-button {
+  background-color: #003366;
+  color: #fff;
+  border: none;
+  padding: 8px 12px; /* Réduire le padding pour un bouton plus compact */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px; /* Réduire légèrement la taille de la police */
+}
+
+.filter-options {
+  position: absolute;
+  top: 35px; /* Ajuster la position pour aligner le menu */
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 5px; /* Réduire le padding pour plus de compacité */
+  width: 130px; /* Réduire la largeur du menu */
+}
+
+.filter-options button {
+  display: block;
+  background: none;
+  border: none;
+  padding: 6px 10px; /* Réduire le padding des boutons de filtre */
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  font-size: 14px; /* Réduire légèrement la taille de la police */
+}
+
+.filter-options button:hover {
+  background-color: #f0f0f0;
+}
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Réduire l'écart entre les cartes */
+  justify-content: center; /* Centrer les cartes de projet horizontalement */
+}
+
+.project-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px; /* Réduire le padding intérieur */
+  width: 260px; /* Réduire la largeur des cartes */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* Assurer que le contenu ne dépasse pas */
+}
+
+.project-card:hover {
+  transform: scale(1.02); /* Zoom légèrement sur survol */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px; /* Réduire la marge inférieure */
+}
+
+.card-header h3 {
+  flex: 1;
+  color: #333;
+  margin: 0;
+  font-size: 18px; /* Réduire légèrement la taille de la police */
+}
+
+.status-indicator {
+  width: 10px; /* Réduire la taille de l'indicateur */
+  height: 10px;
+  border-radius: 50%;
+}
+
+.card-body {
+  text-align: center;
+  font-size: 12px; /* Réduire légèrement la taille de la police */
+}
+
+.chart-container {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 700px; /* Réduire la largeur maximale */
+}

@@ -1,0 +1,35 @@
+<!-- dashboard.component.html -->
+<!-- Section du tableau d'informations -->
+<ul class="box-info">
+  <li>
+    <a [routerLink]="['/calendrier']">
+      <i class='bx bxs-calendar'></i> <!-- Icône Calendrier -->
+      <span class="text">
+        <h3>Calendrier</h3>
+      </span>
+    </a>
+  </li>
+  <li>
+    <a [routerLink]="['/technicien']">
+      <i class='bx bxs-user'></i> <!-- Icône Technicien -->
+      <span class="text">
+        <h3>Technicien</h3>
+        <p>{{ nombreTechniciens }}</p> <!-- Affichage dynamique du nombre de techniciens -->
+      </span>
+    </a>
+  </li>
+  <li>
+    <a [routerLink]="['/projet']">
+      <i class='bx bxs-briefcase'></i> <!-- Icône Projet -->
+      <span class="text">
+        <h3>Projet</h3>
+        <p>{{ nombreProjets }}</p> <!-- Affichage dynamique du nombre de projets -->
+      </span>
+    </a>
+  </li>
+</ul>
+
+<!-- Section du graphique -->
+<div class="chart-container">
+  <app-tendance-employes></app-tendance-employes> <!-- Ajout du composant graphique -->
+</div>

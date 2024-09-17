@@ -1,0 +1,150 @@
+/* Styles généraux pour le conteneur du calendrier */
+.calendrier-container {
+  width: 100%;
+  max-width: 1200px; /* Taille maximale pour le conteneur */
+  margin: 0 auto; /* Centre le conteneur */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Styles pour l'en-tête du calendrier */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.calendar-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.calendar-button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles pour l'en-tête des jours du calendrier */
+.gantt-header {
+  display: flex;
+  border-bottom: 2px solid #ddd;
+}
+
+.gantt-day {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+  background-color: #f8f9fa; /* Couleur de fond des jours */
+}
+
+/* Styles pour le contenu des barres de projets */
+.gantt-content {
+  position: relative;
+  height: 400px; /* Hauteur ajustable */
+  overflow-x: auto;
+  overflow-y: hidden; /* Cache les barres si elles dépassent la hauteur */
+}
+
+.gantt-row {
+  position: relative;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.gantt-bar {
+  position: absolute;
+  height: 100%;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  white-space: nowrap;
+  z-index: 1;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.gantt-bar:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Assombrir légèrement le fond */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ajouter une ombre portée */
+  transform: scale(1.05); /* Agrandir légèrement */
+}
+
+/* Styles pour la boîte d'information du projet */
+.info-box {
+  position: fixed; /* Fixe la position en haut de l'écran */
+  top: 20%; /* Ajustez selon vos préférences */
+  left: 50%;
+  transform: translateX(-50%); /* Centre horizontalement */
+  width: 350px; /* Largeur légèrement plus large */
+  padding: 20px;
+  background-color: #ffffff;
+  border: 2px solid #007bff; /* Bordure bleue */
+  border-radius: 12px; /* Coins arrondis */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre douce */
+  z-index: 1000; /* Assurez-vous qu'il est au-dessus de tout autre contenu */
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.info-box h3 {
+  margin-top: 0;
+  color: #007bff; /* Couleur du titre */
+}
+
+.info-box p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.info-box button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.info-box button:hover {
+  background-color: #0056b3; /* Couleur au survol */
+}
+
+/* Superposition pour la boîte d'information */
+.info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Ombre semi-transparente */
+  z-index: 999; /* Juste en dessous de la boîte d'information */
+}
+
+/* Styles pour le titre de la page */
+.page-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-title h1 {
+  font-size: 2.5em;
+  color: #007bff;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}

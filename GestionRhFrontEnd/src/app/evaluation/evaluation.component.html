@@ -1,0 +1,131 @@
+<!-- Notifications Toast -->
+<div *ngIf="toastMessage" [ngClass]="{'toast-success': toastType === 'success', 'toast-error': toastType === 'error'}" class="toast">
+    {{ toastMessage }}
+  </div>
+  
+  <!-- Main Container -->
+  <div class="container">
+    <div class="header">
+        <h1>Gestion des Évaluations</h1>
+        <button (click)="toggleForm()">{{ showForm ? 'Fermer le Formulaire' : 'Ajouter une Évaluation' }}</button>
+    </div>
+  
+    <!-- Formulaire -->
+    <div *ngIf="showForm" class="form-container">
+        <div class="tabs">
+            <button (click)="currentTab = 'infos'" [ngClass]="{'active-tab': currentTab === 'infos'}">Informations</button>
+            <button (click)="currentTab = 'scores'" [ngClass]="{'active-tab': currentTab === 'scores'}">Scores</button>
+            <button (click)="currentTab = 'commentaires'" [ngClass]="{'active-tab': currentTab === 'commentaires'}">Commentaires</button>
+        </div>
+  
+        <div class="tab-content">
+            <!-- Informations -->
+            <div *ngIf="currentTab === 'infos'" class="form-card">
+                <h2>Informations</h2>
+                <form (ngSubmit)="saveEvaluation()" #evaluationForm="ngForm">
+                   <div class="form-group">
+                        <label for="technicien">Technicien:</label>
+                        <ng-select
+                            id="technicien"
+                            [items]="techniciensFormatted"
+                            bindLabel="fullName"
+                            bindValue="id"
+                            [(ngModel)]="selectedTechnicien"
+                            name="technicien"
+                            placeholder="Sélectionner un technicien"
+                            [searchable]="true"
+                            [clearable]="true"
+                            [virtualScroll]="true">
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateEvaluation">Date d'Évaluation:</label>
+                        <input id="dateEvaluation" type="date" [(ngModel)]="evaluation.dateEvaluation" name="dateEvaluation" required />
+                    </div>
+                    <div class="form-group" *ngIf="!isFormValid">
+                        <span class="error-message">Veuillez remplir tous les champs obligatoires.</span>
+                    </div>
+                    <button type="submit" [disabled]="!isFormValid">Enregistrer</button>
+                </form>
+            </div>
+  
+            <!-- Scores -->
+            <div *ngIf="currentTab === 'scores'" class="form-card">
+                <h2>Scores</h2>
+                <form (ngSubmit)="saveEvaluation()" #scoresForm="ngForm">
+                    <div class="form-group" *ngFor="let critere of criteres">
+                        <label for="{{critere}}">{{critere}}:</label>
+                        <select id="{{critere}}" [(ngModel)]="evaluation[critere]" name="{{critere}}" required>
+                            <option *ngFor="let score of scores | keyvalue" [value]="score.key">{{score.key}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group" *ngIf="!isFormValid">
+                        <span class="error-message">Veuillez remplir tous les champs obligatoires.</span>
+                    </div>
+                    <button type="submit" [disabled]="!isFormValid">Enregistrer</button>
+                </form>
+            </div>
+  
+            <!-- Commentaires -->
+            <div *ngIf="currentTab === 'commentaires'" class="form-card">
+                <h2>Commentaires</h2>
+                <form (ngSubmit)="saveEvaluation()" #commentairesForm="ngForm">
+                    <div class="form-group">
+                        <label for="commentaire">Commentaire:</label>
+                        <textarea id="commentaire" [(ngModel)]="evaluation.commentaire" name="commentaire"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="formation">Formation:</label>
+                      <textarea id="formation" [(ngModel)]="evaluation.formation" name="formation"></textarea>
+                  </div>
+                    <div class="form-group" *ngIf="!isFormValid">
+                        <span class="error-message">Veuillez remplir tous les champs obligatoires.</span>
+                    </div>
+                    <button type="submit" [disabled]="!isFormValid">Enregistrer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+    <!-- Table des Evaluations -->
+    <div class="evaluation-table">
+        <div class="search">
+            <input type="text" (input)="filterEvaluations($event)" placeholder="Rechercher par technicien" />
+        </div>
+  
+        <table>
+            <thead>
+                <tr>
+                    <th>Technicien</th>
+                    <th>Qualité</th>
+                    <th>Délai</th>
+                    <th>Coopération</th>
+                    <th>Formation</th>
+                    <th>Score Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let evaluation of filteredEvaluations">
+                    <td>{{getTechnicienName(1) }}</td>
+                    <td>{{ evaluation.qualite }}</td>
+                    <td>{{ evaluation.delai }}</td>
+                    <td>{{ evaluation.cooperation }}</td>
+                    <td>{{ evaluation.formation }}</td>
+                    <td>{{ evaluation.scoreTotal | number: '1.0-2' }}</td>
+                    <td>
+                        <button (click)="editEvaluation(evaluation.id)">Modifier</button>
+                        <button (click)="confirmDelete(evaluation.id)">Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+  
+        <div class="pagination">
+            <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+            <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+            <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Suivant</button>
+        </div>
+    </div>
+  </div>
+  

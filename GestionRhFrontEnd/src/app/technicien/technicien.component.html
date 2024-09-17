@@ -1,0 +1,140 @@
+<!-- Notification Toast -->
+<div *ngIf="toastMessage" [ngClass]="{'toast-success': toastType === 'success', 'toast-error': toastType === 'error'}" class="toast">
+  {{ toastMessage }}
+</div>
+
+<!-- Main Container -->
+<div class="container">
+  <div class="header">
+    <h1>Gestion des Techniciens</h1>
+    <button (click)="toggleForm()">{{ showForm ? 'Fermer le Formulaire' : 'Ajouter un Technicien' }}</button>
+  </div>
+
+  <!-- Formulaire -->
+  <div *ngIf="showForm" class="form-container">
+    <div class="tabs">
+      <button (click)="currentTab = 'infos'" [ngClass]="{'active-tab': currentTab === 'infos'}">Informations</button>
+      <button (click)="currentTab = 'adresse'" [ngClass]="{'active-tab': currentTab === 'adresse'}">Adresse</button>
+      <button (click)="currentTab = 'autres'" [ngClass]="{'active-tab': currentTab === 'autres'}">Autres</button>
+    </div>
+
+    <div class="tab-content">
+      <!-- Informations -->
+      <div *ngIf="currentTab === 'infos'" class="form-card">
+        <h2>Informations</h2>
+        <form (ngSubmit)="saveTechnicien()" #technicienForm="ngForm">
+          <div class="form-group">
+            <label for="matricule">Matricule:</label>
+            <input id="matricule" [(ngModel)]="technicien.matricule" name="matricule" required />
+          </div>
+          <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input id="nom" [(ngModel)]="technicien.nom" name="nom" required />
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prénom:</label>
+            <input id="prenom" [(ngModel)]="technicien.prenom" name="prenom" required />
+          </div>
+          <div class="form-group">
+            <label for="dateRecrutement">Date de Recrutement:</label>
+            <input id="dateRecrutement" type="date" [(ngModel)]="technicien.dateRecrutement" name="dateRecrutement" required />
+          </div>
+          <div class="form-group">
+            <label for="dateNaissance">Date de Naissance:</label>
+            <input id="dateNaissance" type="date" [(ngModel)]="technicien.dateNaissance" name="dateNaissance" required />
+          </div>
+        </form>
+      </div>
+
+      <!-- Adresse -->
+      <div *ngIf="currentTab === 'adresse'" class="form-card">
+        <h2>Adresse</h2>
+        <form (ngSubmit)="saveTechnicien()" #adresseForm="ngForm">
+          <div class="form-group">
+            <label for="adresseRue">Rue:</label>
+            <input id="adresseRue" [(ngModel)]="technicien.adresseRue" name="adresseRue" required />
+          </div>
+          <div class="form-group">
+            <label for="adresseVille">Ville:</label>
+            <input id="adresseVille" [(ngModel)]="technicien.adresseVille" name="adresseVille" required />
+          </div>
+          <div class="form-group">
+            <label for="adresseRegion">Région:</label>
+            <input id="adresseRegion" [(ngModel)]="technicien.adresseRegion" name="adresseRegion" required />
+          </div>
+          <div class="form-group">
+            <label for="adresseCodePostal">Code Postal:</label>
+            <input id="adresseCodePostal" [(ngModel)]="technicien.adresseCodePostal" name="adresseCodePostal" required />
+          </div>
+        </form>
+      </div>
+
+      <!-- Autres -->
+      <div *ngIf="currentTab === 'autres'" class="form-card">
+        <h2>Autres Informations</h2>
+        <form (ngSubmit)="saveTechnicien()" #autresForm="ngForm">
+          <div class="form-group">
+            <label for="telephone">Téléphone:</label>
+            <input id="telephone" [(ngModel)]="technicien.telephone" name="telephone" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" [(ngModel)]="technicien.email" name="email" type="email" required />
+          </div>
+          <div class="form-group">
+            <label for="cin">CIN:</label>
+            <input id="cin" [(ngModel)]="technicien.cin" name="cin" required />
+          </div>
+          <div class="form-group">
+            <label for="situationFamiliale">Situation Familiale:</label>
+            <select id="situationFamiliale" [(ngModel)]="technicien.situationFamiliale" name="situationFamiliale" required>
+              <option *ngFor="let situation of situationsFamiliales" [value]="situation">{{ situation }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fonction">Fonction:</label>
+            <input id="fonction" [(ngModel)]="technicien.fonction" name="fonction" required />
+          </div>
+        </form>
+      </div>
+
+      <button (click)="saveTechnicien()" [disabled]="!isFormValid()">Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- Liste des Techniciens -->
+  <div class="list-container">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Rechercher par nom, prénom ou matricule" />
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Matricule</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Date de Recrutement</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tech of filteredTechniciens">
+          <td>{{ tech.matricule }}</td>
+          <td>{{ tech.nom }}</td>
+          <td>{{ tech.prenom }}</td>
+          <td>{{ tech.dateRecrutement | date }}</td>
+          <td>
+            <button (click)="editTechnicien(tech.id)">Éditer</button>
+            <button (click)="deleteTechnicien(tech.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button (click)="goToPage(page)" *ngFor="let page of [].constructor(totalPages); let i = index" [ngClass]="{'active': i + 1 === currentPage}">
+        {{ i + 1 }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="rapport-container">
+  <header>
+    <h1>Liste des Rapports des Projets</h1>
+  </header>
+  
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <input type="text" placeholder="Rechercher un projet..." [(ngModel)]="searchQuery" (input)="filterRapports()" />
+  </div>
+
+  <div class="rapport-list">
+    <ul>
+      <li *ngFor="let projet of filteredProjets">
+        <div class="d-flex align-items-center justify-content-between p-3 mb-3 border rounded bg-white shadow-sm">
+  
+          <!-- Colonne 1 : Nom du projet -->
+          <h5 class="text-primary fw-bold" style="font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 15px;">
+            {{ projet.nom }}
+          </h5>
+        
+          <!-- Colonne 2 : Informations Responsable et État -->
+          <div class="d-flex align-items-center">
+            <p class="mb-0 text-muted me-3 fw-bold">
+              <strong>Responsable :</strong> {{ projet.responsable }}
+            </p>
+            <p class="mb-0 text-muted fw-bold">
+              <strong>État :</strong> {{ projet.etat }}
+            </p>
+          </div>
+          
+          <!-- Colonne 3 : Bouton Voir Détails -->
+          <button class="btn btn-primary btn-sm ms-3" (click)="showDetails(projet)">
+            {{ selectedRapport === projet ? 'Cacher Détails' : 'Voir Détails' }}
+          </button>
+          
+        </div>
+        
+        
+        
+
+        <!-- Détails du rapport -->
+        <div *ngIf="selectedRapport === projet" class="rapport-details">
+          <header>
+            <img src="assets/images/oualanger.png" class="logo" />
+            <h1>Rapport de Projet</h1>
+          </header>
+
+          <section class="rapport-details-content">
+            <h2>Informations du Projet</h2>
+            <div class="details-grid">
+              <div><strong>Nom :</strong> {{ projet.nom }}</div>
+              <div><strong>Emplacement :</strong> {{ projet.emplacement }}</div>
+              <div><strong>Date de Début :</strong> {{ projet.dateDebut | date }}</div>
+              <div><strong>Date de Fin :</strong> {{ projet.dateFin | date }}</div>
+              <div><strong>Responsable :</strong> {{ projet.responsable }}</div>
+              <div><strong>État :</strong> {{ projet.etat }}</div>
+              <div><strong>Commentaire :</strong> {{ projet.commentaire }}</div>
+            </div>
+
+            <h3>Techniciens Assignés</h3>
+            <div class="techniciens-list">
+              <ul class="list-group">
+                <li *ngFor="let tech of projet.techniciens" class="list-group-item d-flex justify-content-between align-items-center">
+                  <div class="technicien-details">
+                    <p><strong>Nom :</strong> {{ tech.nom }} {{ tech.prenom }}</p>
+                    <p><strong>Matricule :</strong> {{ tech.matricule }}</p>
+                  </div>
+                  
+                  <!-- Bouton Remove aligné à droite -->
+                  <button class="btn btn-danger btn-sm ms-auto" (click)="removeTechnicien(tech.id,projet.id)">
+                    Remove
+                  </button>
+                </li>
+              </ul>
+            </div>
+            
+
+            <section class="rapport-content">
+              <h2>Contenu du Rapport</h2>
+              <p>{{ projet.contenuRapport }}</p>
+            </section>
+
+            <footer>
+              <p>Date de Création : {{projet.dateCreationRapport | date }}</p>
+              <p>État du Rapport : {{ projet.etat }}</p>
+              <button (click)="printReport(projet)" class="print">Imprimer</button>
+              <button (click)="notifyReport(projet)" class="notify">Envoyer Notification</button>
+            </footer>
+          </section>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

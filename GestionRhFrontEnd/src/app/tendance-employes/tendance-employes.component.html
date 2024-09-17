@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="recent-projet-container">
+    <header class="header">
+      <h2>Projets Récents</h2>
+      <div class="filter-menu">
+        <button class="filter-button" (click)="toggleFilterMenu()">☰</button>
+        <div class="filter-options" *ngIf="showFilterMenu">
+          <button (click)="setFilter('')">Tous</button>
+          <button (click)="setFilter('En cours')">En cours</button>
+          <button (click)="setFilter('En attente')">En attente</button>
+          <button (click)="setFilter('Terminé')">Terminé</button>
+          <button (click)="setFilter('Annulé')">Annulé</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="projects-grid">
+      <!-- Afficher uniquement les 3 projets les plus proches -->
+      <div *ngFor="let projet of displayedProjets" class="project-card">
+        <div class="card-header">
+          <h3>{{ projet.nom }}</h3>
+          <span class="status-indicator" [ngStyle]="{'background-color': getStatusColor(projet.etat)}"></span>
+        </div>
+        <div class="card-body">
+          <p>Jours Restants: {{ formatDaysRemaining(getDaysRemaining(projet.dateFin)) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ajouter le graphique -->
+  <div class="chart-container">
+    <canvas id="tendanceChart"></canvas>
+  </div>
+</div>

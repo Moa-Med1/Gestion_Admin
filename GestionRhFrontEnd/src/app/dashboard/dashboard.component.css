@@ -1,0 +1,86 @@
+/* Style général pour les conteneurs d'informations */
+.box-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  list-style: none;
+  margin: 0;
+}
+
+.box-info li {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  color: #ffffff; /* Couleur du texte pour contraste avec les couleurs de fond */
+}
+
+/* Couleurs de fond pour chaque conteneur */
+.box-info li:nth-child(1) {
+  background: #ff6f61; /* Couleur vive pour le premier conteneur */
+}
+
+.box-info li:nth-child(2) {
+  background: #4db6ac; /* Couleur douce pour le deuxième conteneur */
+}
+
+.box-info li:nth-child(3) {
+  background: #ffca28; /* Couleur jaune pour le troisième conteneur */
+}
+
+.box-info li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Couleur des icônes */
+.box-info i {
+  font-size: 2.5rem;
+  color: #ffffff; /* Couleur des icônes pour le contraste */
+  transition: color 0.3s ease;
+}
+
+.box-info li:hover i {
+  color: #e0e0e0; /* Couleur plus claire au survol pour les icônes */
+}
+
+.box-info .text {
+  margin-top: 15px;
+}
+
+.box-info h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #ffffff; /* Couleur du texte pour contraste */
+}
+
+.box-info p {
+  margin: 5px 0 0;
+  font-size: 1.2rem;
+  color: #ffffff; /* Couleur du texte pour contraste */
+}
+
+/* Conteneur du graphique */
+.chart-container {
+  margin-top: 30px; /* Marge supérieure pour séparer le graphique du tableau d'informations */
+  background-color: #f8f9fa; /* Couleur de fond douce */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container h2 {
+  text-align: center; /* Centrer le titre du graphique */
+  color: #333;
+  margin-bottom: 20px;
+}
+
+canvas {
+  width: 100% !important; /* Assurez-vous que le graphique occupe tout l'espace disponible */
+  height: 400px; /* Ajustez la hauteur selon vos besoins */
+  border-radius: 8px; /* Coins arrondis pour le graphique */
+}

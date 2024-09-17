@@ -1,0 +1,87 @@
+<!-- SIDEBAR -->
+<section id="sidebar" [ngClass]="status ? 'hide' : ''">
+  <a href="/">
+    <img src="assets/images/oualanger.png" alt="Logo" style="width: 70px; height: auto; margin: 2px auto; display: block;">
+  </a>
+  <ul class="side-menu top">
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class='bx bxs-dashboard'></i>
+        <span class="text">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/technicien" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class='bx bxs-user'></i> <!-- Utilisé ici pour "Technicien" -->
+        <span class="text">Technicien</span>
+      </a>
+    </li>
+    <li><a routerLink="/projet" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <i class='bx bxs-folder'></i> <!-- Utilisé ici pour "Projet" -->
+      <span class="text">Projet</span>
+    </a></li>
+    <li>
+      <a routerLink="/rapport" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class='bx bxs-file-blank'></i> <!-- Utilisé ici pour "Assignation du Technicien" -->
+        <span class="text">Rapport des projets</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/evaluation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class='bx bxs-star'></i> <!-- Utilisé ici pour "Evaluation" -->
+        <span class="text">Evaluation</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/pointage" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class='bx bxs-time'></i> <!-- Utilisé ici pour "Pointage" -->
+        <span class="text">Pointage</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/rapportpointage" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class='bx bxs-file-blank'></i> <!-- Utilisé ici pour "Assignation du Technicien" -->
+        <span class="text">Rapport des pointages</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/calendrier" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class='bx bxs-calendar'></i> <!-- Utilisé ici pour "Calendrier" -->
+        <span class="text">Calendrier</span>
+      </a>
+    </li>
+  </ul>
+</section>
+<!-- SIDEBAR -->
+
+<!-- CONTENT -->
+<section id="content">
+  <!-- NAVBAR -->
+  <nav>
+    <i (click)="addToggle()" class='bx bx-menu'></i>
+    
+    <form action="#">
+      <div class="form-input">
+        <input type="search" placeholder="Recherche">
+        <button type="button" class="search-btn"><i class='bx bx-search'></i></button>
+      </div>
+    </form>
+    
+    <!-- Profil avec menu déroulant -->
+    <div class="profile-dropdown">
+      <a href="#" class="profile">
+        <!-- Ajoutez d'autres options ici si nécessaire -->
+      </a>
+      <div class="dropdown-content">
+        <!-- Ajoutez d'autres options ici si nécessaire -->
+      </div>
+    </div>
+  </nav>
+  <!-- NAVBAR -->
+
+  <!-- MAIN CONTENT -->
+  <router-outlet></router-outlet>
+  <!-- MAIN CONTENT -->
+</section>
+<!-- CONTENT -->
+ 
